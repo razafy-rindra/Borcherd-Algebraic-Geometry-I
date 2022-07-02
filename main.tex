@@ -1,0 +1,98 @@
+\input{template.tex}
+\author{Rindra Razafy, "Hagamena"}
+\title{Borcherd Algebraic Geometry 1}
+\setcounter{section}{-1}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section{Prologue}
+Some quick notes summarising the "Algebraic geometry 1" video lectures from R.E. Borcherds, found \href{https://youtube.com/playlist?list=PL8yHsr3EFj53j51FG6wCbQKjBgpjKa5PX}{here} 
+
+\newpage
+
+\section{Introduction}
+\subsection{Examples}
+\subsubsection{Pythagorean triangles}
+\textbf{Problem:} How do we classify all Pythagorean triangles.
+
+We will look at two ways of solving this:\begin{enumerate}
+    \item \textbf{Algebraic way:} 
+    We want to solve\begin{equation}
+        x^2+y^2 = z^2 \text{ with }x,y,z\text{ coprime integers}
+    \end{equation}
+    
+    If we look at the equation mod $4$ we notice that $x^2,y^2,z^2 \equiv 0,1 \mod 4$, since the squares mod $4$ all take these forms.
+    
+    So $z$ is odd and WLOG we assume that $x$ is even and $y$ is odd. 
+    We rearange the equation:\begin{equation}
+        y^2 = z^2-x^2 = (z-x)(z+x)
+    \end{equation}
+    Assume that $z-x = dm_1$ and $z+x = dm_2$, therefore we have that $2z = d(m_1+m_2)$ and $2x = d(m_2-m_1)$, then since $d\mid 2z$ and $d\mid 2x$, and $\gcd(x,z) = 1$ we have two cases, either $d$ divides both $x$ and $z$, which would imply that $d=1$.
+    
+    Or $d$ divides $2$ which means that $d = 1$, or $d=2$. But note that since $x,z$ are of opposite parity $z+x$ is odd so $d\neq 2$.
+    
+    So in all cases, $d = 1$. So $(z-x)$ and $(z+x)$ are coprime.
+    
+    But since their product is a square this implies that $z-x$ and $z+x$ are squares. so:\begin{equation}
+        z-x = r^2, \text{ and }z+x = s^2, \text{ where }s,r\text{ are odd and coprime}
+    \end{equation}
+    
+    So we conclude that $z = \frac{r^2+s^2}{2}$, $x = \frac{s^2-r^2}{2}, y=rs $ for any $r,s$ odd and coprime.
+    
+    \item \textbf{Geometric solution}
+    Let $X = \frac{x}{z}$, $Y = \frac{y}{z}$ and we want to solve\begin{equation}
+        X^2+Y^2=1, \ X,Y\text{rational}
+    \end{equation}
+    
+    So we are looking for rational points on the unit circle.
+    
+    Note if we draw the line from $(-1,0)$ to $(X,Y)$ on the unit circle with $X,T\in \Q$.It will intersect the y-axis at the point $(0,t)$ where $t=\frac{Y}{X+1}\in \Q$.
+    
+    Conversely, if we are given $t$ we can find $(X,Y)$, since we know that\begin{equation*}
+        Y=t(X+1) \text{ and }t^2(X+1)^2 + X^2 = 1 \Rightarrow (X+1)((t^2+1)X+t^2-1) = 0
+    \end{equation*}
+    And finding roots we see that $X = \frac{1-t^2}{1+t^2}$ and $Y=\frac{2t}{1+t^2}$, for $t\in \Q$.
+    
+    \
+    
+    So there is a correspondence between points on the circle except for the point at $(-1,0)$ and points on the $y-$axis. This is what is called a Birational Equivalence.
+    
+    \definition\textbf{Birational Equivalence}
+    An equivalence excepts on subsets of co-dimension at least $1$.
+\end{enumerate}
+Treating this problem as a geometrical problem gives us additional insights. Indeed, for example the circle forms a group of rotations with operation:\begin{equation}
+    (x_1,y_1)\times (x_2,y_2) = (x_1x_2-y_1y_2,x_1y_2+x_2y_1)
+\end{equation}
+
+This is the cosine and sign of the sum of two angles, indeed if $(x_1,y_1) = (\cos\theta_1,\sin\theta_1)\text{ and }(x_2,y_2) = (\cos\theta_2,\sin\theta_2)$ then:\begin{equation}
+ (\cos\theta_1,\sin\theta_1)\times (\cos\theta_2,\sin\theta_2) = (\cos\theta_1\cos\theta_2-\sin\theta_1\sin\theta_2, \dots) = (\cos(\theta_1+\theta_2),\sin(\theta_1+\theta_2))
+\end{equation}
+This is the simplest example of what is called an Algebraic group.
+
+\definition\textbf{Algebraic Groups} We can think of this as functor from (commutative) Rings to Groups.
+\begin{equation}
+   G\colon R\rightarrow (\{(x,y)\in R^2\mid x^2+y^2=1\},\times)
+\end{equation}
+Where the operation is defined as above, and the identity is $(1,0)$ and $(x,y)^{-1} = (x,-y)$.
+
+\example $G(\C) = \{(x,y)\in\C \mid x^2+y^2 = 1\}$
+
+But note that $1 = x^2+y^2 = {\underbrace{(x+iy)}_z}{\underbrace{(x-iy)}_{\overline{z}}}$. So we see that \begin{equation}
+    G(\C) = \{(x,y)\in\C \mid x^2+y^2 = 1\}\simeq \{z\in \C \mid z\text{ is invertible}\} = \C^\ast
+\end{equation}
+
+\textbf{Summary}
+There are many ways to view a circle:\begin{enumerate}
+    \item Subset of $\R^2$
+    \item Polynomial $x^2+y^2-1 \rightarrow$   Algebraic set
+    \item Ideal $(x^2+y^2-1)$ in ring $\R[x,y]$.
+    \item Ring $\R[x,y]/(x^2+y^2-1) = $ coordinate ring of $S^1$. Can be seen as the set of polynomials on the circle.
+    \item (Smooth) manifold
+    \item Group (Algebraic Group)
+    \item Functor from Rings to Groups or Sets (Grothendieck)
+\end{enumerate}
+\end{document}
