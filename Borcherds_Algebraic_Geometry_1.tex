@@ -1,5 +1,9 @@
 \input{template.tex}
-\author{Rindra Razafy, "Hagamena"}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+
+\author{Rindra Razafy, ``Hagamena''}
 \title{Borcherd Algebraic Geometry 1}
 \setcounter{section}{-1}
 \begin{document}
@@ -10,7 +14,7 @@
 \newpage
 
 \section{Prologue}
-Some quick notes summarising the "Algebraic geometry 1" video lectures from R.E. Borcherds, found \href{https://youtube.com/playlist?list=PL8yHsr3EFj53j51FG6wCbQKjBgpjKa5PX}{here} 
+Some quick notes summarising the ``Algebraic geometry 1'' video lectures from R.E. Borcherds, found \href{https://youtube.com/playlist?list=PL8yHsr3EFj53j51FG6wCbQKjBgpjKa5PX}{here} 
 
 \newpage
 
@@ -37,7 +41,7 @@ We will look at two ways of solving this:\begin{enumerate}
     
     So in all cases, $d = 1$. So $(z-x)$ and $(z+x)$ are coprime.
     
-    But since their product is a square this implies that $z-x$ and $z+x$ are squares. so:\begin{equation}
+    But since their product is a square this implies that $z-x$ and $z+x$ are squares, so:\begin{equation}
         z-x = r^2, \text{ and }z+x = s^2, \text{ where }s,r\text{ are odd and coprime}
     \end{equation}
     
@@ -53,7 +57,7 @@ We will look at two ways of solving this:\begin{enumerate}
     Note if we draw the line from $(-1,0)$ to $(X,Y)$ on the unit circle with $X,T\in \Q$.It will intersect the y-axis at the point $(0,t)$ where $t=\frac{Y}{X+1}\in \Q$.
     
     Conversely, if we are given $t$ we can find $(X,Y)$, since we know that\begin{equation*}
-        Y=t(X+1) \text{ and }t^2(X+1)^2 + X^2 = 1 \Rightarrow (X+1)((t^2+1)X+t^2-1) = 0
+        Y=t(X+1) \text{ and }t^2{(X+1)}^2 + X^2 = 1 \Rightarrow (X+1)((t^2+1)X+t^2-1) = 0
     \end{equation*}
     And finding roots we see that $X = \frac{1-t^2}{1+t^2}$ and $Y=\frac{2t}{1+t^2}$, for $t\in \Q$.
     
@@ -61,8 +65,10 @@ We will look at two ways of solving this:\begin{enumerate}
     
     So there is a correspondence between points on the circle except for the point at $(-1,0)$ and points on the $y-$axis. This is what is called a Birational Equivalence.
     
-    \definition\textbf{Birational Equivalence}
-    An equivalence excepts on subsets of co-dimension at least $1$.
+    \begin{definition}
+        \textbf{Birational Equivalence}
+        An equivalence excepts on subsets of co-dimension at least $1$.
+    \end{definition}
 \end{enumerate}
 Treating this problem as a geometrical problem gives us additional insights. Indeed, for example the circle forms a group of rotations with operation:\begin{equation}
     (x_1,y_1)\times (x_2,y_2) = (x_1x_2-y_1y_2,x_1y_2+x_2y_1)
@@ -73,13 +79,19 @@ This is the cosine and sign of the sum of two angles, indeed if $(x_1,y_1) = (\c
 \end{equation}
 This is the simplest example of what is called an Algebraic group.
 
-\definition\textbf{Algebraic Groups} We can think of this as functor from (commutative) Rings to Groups.
-\begin{equation}
-   G\colon R\rightarrow (\{(x,y)\in R^2\mid x^2+y^2=1\},\times)
-\end{equation}
-Where the operation is defined as above, and the identity is $(1,0)$ and $(x,y)^{-1} = (x,-y)$.
+\begin{definition}
+    \textbf{Algebraic Groups} We can think of this as functor from (commutative) Rings to Groups.
 
-\example $G(\C) = \{(x,y)\in\C \mid x^2+y^2 = 1\}$
+    \begin{equation}
+        G\colon R\rightarrow (\{(x,y)\in R^2\mid x^2+y^2=1\},\times)
+     \end{equation}
+     Where the operation is defined as above, and the identity is $(1,0)$ and ${(x,y)}^{-1} = (x,-y)$.
+     
+\end{definition}
+
+\begin{example}
+    $G(\C) = \{(x,y)\in\C \mid x^2+y^2 = 1\}$
+\end{example} 
 
 But note that $1 = x^2+y^2 = {\underbrace{(x+iy)}_z}{\underbrace{(x-iy)}_{\overline{z}}}$. So we see that \begin{equation}
     G(\C) = \{(x,y)\in\C \mid x^2+y^2 = 1\}\simeq \{z\in \C \mid z\text{ is invertible}\} = \C^\ast
@@ -100,33 +112,125 @@ There are many ways to view a circle:\begin{enumerate}
 In this section we will discuss some cubic cubes.\begin{enumerate}
     \item $y^2 = x^3+x^2$
     
-There is almost a 1-1 correspondence between $(x,y)$ rational on this curve and $t\in \Q$, via $t = \frac{y}{x}$, the slope of the line through $(x,y)$ and the origin. Indeed since $y=tx$, we have(if $x\neq 0$):\begin{equation}
+There is almost a 1-to-1 correspondence between $(x,y)$ rational on this curve and $t\in \Q$, via $t = \frac{y}{x}$, the slope of the line through $(x,y)$ and the origin. 
+Indeed since $y=tx$, if $x\neq 0$, we have:\begin{equation}
     t^2x^2 = x^3+x^2 \Rightarrow t^2 = 1+x \Rightarrow x=t^2-1 \text{ and } y=t^3-t 
 \end{equation}
 
-We don't quite get a 1-1 correspondence because $t=1$ and $t=-1$ both correspond to $(x,y) = (0,0)$. 
+We don't quite get a 1--1 correspondence because $t=1$ and $t=-1$ both correspond to $(x,y) = (0,0)$. 
 
 So we can think of this cubic curve as a copy of $\Q$, but two of these points are mapped to the same point.
 
-\definition Resolution of Singluarity
-A singularity is a "bad" point of our curve, and a resolution is getting a "nice" map from a curve without singularities to our curve.
+\begin{definition}
+    Resolution of Singluarity
+    A singularity is a ``bad'' point of our curve, and a resolution is getting a ``nice'' map from a curve without singularities to our curve.    
+\end{definition} 
 
 \
 
-The resolution in the above case is done by a process called "blowing-up".
-\remark Hironaka, showed that blowing-up resolves singularites in zero characteristic. (The problem in non-zero characteristic is still unsolved).
-
-\remark Finding rational points on curves can be difficult. For example:\begin{equation}
-    x^n + y^n = 1 \Rightarrow X^n+Y^n=Z^n \text{ where }x=X/Z \text{ and }y=Y/Z
-\end{equation}
-This is Fermat's Last Theorem, which was very hard to solve.
+The resolution in the above case is done by a process called ``blowing-up''.
+\begin{remark}
+    Hironaka, showed that blowing-up resolves singularites in zero characteristic. (The problem in non-zero characteristic is still unsolved).
+\end{remark}
+\begin{remark}
+    Finding rational points on curves can be difficult. For example:\begin{equation}
+        x^n + y^n = 1 \Rightarrow X^n+Y^n=Z^n \text{ where }x=X/Z \text{ and }y=Y/Z
+    \end{equation}
+    This is Fermat's Last Theorem, which was very hard to solve.        
+\end{remark}
 
 \item $x^3+y^3 = 9$
 
-Note on this curve we can define an algebraic operation "+", if we add in a point at infinity.
-In that case, the point at infinity is the identity "0", and $a,b,c$ on the curve lie on a line if and only if $a+b+c = 0$ in the group. To check that the group operation is associative we use the fact that: $a_1+a_2+\dots = b_1+b_2+\dots \iff $there is a rational function with poles at $a_i$ and zeroes at the $b_i$.
+Note on this curve we can define an algebraic operation ``+'', if we add in a point at infinity.
+In that case, the point at infinity is the identity ``0'', and $a,b,c$ on the curve lie on a line if and only if $a+b+c = 0$ in the group. To check that the group operation is associative we use the fact that: $a_1+a_2+\cdots = b_1+b_2+\dots \iff $there is a rational function with poles at $a_i$ and zeroes at the $b_i$.
 
-\definition Groups of this kind are called \textbf{elliptic curves}, there are the 1-dimensional case of what is called \textbf{Abelian varieties}. Abelian varieties are algebraic groups that are "projective", roughly they have no missing points.
+\begin{definition}
+    Groups of this kind are called \textbf{elliptic curves}, there are the 1-dimensional case of what is called \textbf{Abelian varieties}. 
+    Abelian varieties are algebraic groups that are ``projective'', roughly they have no missing points.
+\end{definition} 
 
 \end{enumerate}
+
+\section{Bézout, Pappus, Pascal}
+\subsection{Bézout's theorem}
+\begin{theorem} \textbf{Bézout}
+    Informally: Two curves of degree $m,n$ in the plane have at most $mn$ intersection, if they have no components in common.    
+
+    \textbf{Stronger version of Bézout}
+    There have exactly $mn$ intersection points if:\begin{enumerate}
+        \item We are working over $\C$
+        \item Count points at infinity
+        \item Counting multiplicities (for example a straight line tangent to a parabola, we need to count the intersection point as two points).
+    \end{enumerate}
+\end{theorem}
+This theorem was originally stated by Newton, though he didn't really prove it.
+
+\
+
+It is actually quite difficult to make sense of multiplicities.
+
+\begin{proof}
+    Informal proof: Suppose the curves are $f(x,y) = 0$ of degree $m$ and $g(x,y) = 0$ of degree $n$.
+
+    Perturb $f,g$ so that $f = p_1\dots p_m$ and $g = q_1\dots q_n$, with $p_i.q_j$ linear.
+
+    Problem: How do we know the number of intersection points doesn't change as we perturb $f,g$
+\end{proof}
+
+This style of proof was very common in the Italian School of Algebraic Geometry, but with these informal reasonings caused them to introduce many false theorems.
+
+Weil and Zariski put Algebraic Geometry on much firmer foundations, but the proofs became much more complicated. 
+
+Nowadays, these informal proofs are mostly useful just to guess what the right answer is (for example understanding the reasoning for the above proof, we can understand the reasoning for 
+the anologue of Bézout's theomre in higher dimensions).
+
+
+\subsection{Pappus' theorem}
+
+\begin{theorem}
+    Informally: Take two straight lines in the plane and on each line choose any three points.
+Number them and join them to every point of a different number on the other line, looking at the intersection point of these lines.
+These three intersection points lie on a straight line.
+\end{theorem}
+
+This theorem is equivalent to commutativity in multiplication. If we look at the anologuous result in a plane over a division ring then:\begin{equation*}
+    \text{Pappus' theorem is true }\iff \text{ The division ring is a field (so multiplication commutes)}
+\end{equation*}
+
+\subsection{Pascal's theorem}
+\begin{theorem}
+    Informally: Choose any six points on an ellipse, seperate your ellipse into two, so that three points lie on one side and three points lie on the other side. Number the points on the first side as 1,2,3 and likewise for the points on the other side. 
+    then join them to every point of a different number on the opposite side, looking at the intersection point of these lines.
+    These three intersection points lie on a straight line.
+\end{theorem}
+
+    \href{https://youtu.be/-9qugwEZDJs?t=955}{\includegraphics[scale = 0.25]{pascal_theorem_pic}}
+
+    \
+
+    \textit{Illustration from the lecture video}
+
+    \
+
+The line on which their intersection lies is called the \textbf{Pascal line}.
+
+\
+
+Pappus' theorem is a degenerate case of Pascal's theorem, Pascal's theorm holds for any degree two curve and two straight lines are a degenerate case of a degree 2 curve.
+
+How do we prove Pascal's theorem? We will use a proof using Algebraic Geometry and Bézout's theorem. 
+
+\begin{proof}
+    We number the lines as in the picture above (noting that they form a funny kind of hexagon) and choose six linear polynomials, 
+    $p_i$, for $i\in \{1,\dots, 6\}$ where $p_i = 0$ on line $i$.
+
+    Now look at $p_1p_3p_5$ and $p_2p_4p_6$, these polynomials vanish on all six points, so choose $\lambda$ such that:\begin{equation}
+        p_1p_3p_5 - \lambda p_2p_4p_6 \text{ this is of degree 3 curve}
+    \end{equation}
+    Vanishes on a seventh point of the conic. Since the conic is of degree $2$, by Bézout there are at most $6$ intersection points 
+    UNLESS they have a common component. So the conic must be contained in the degree $3$ curve.
+
+    So this degree $3$ curve is equal to the union of a conic and a line, which is Pascal's line. Indeed since $p_1p_3p_5$ and $p_2p_4p_6$ both vanish on the 
+    three intersection points, since they are on the curve but not on the conic, they must be on the line.
+\end{proof}
 \end{document}
