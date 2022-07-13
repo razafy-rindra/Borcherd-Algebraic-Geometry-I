@@ -95,4 +95,38 @@ There are many ways to view a circle:\begin{enumerate}
     \item Group (Algebraic Group)
     \item Functor from Rings to Groups or Sets (Grothendieck)
 \end{enumerate}
+
+\section{Two cubic curves}
+In this section we will discuss some cubic cubes.\begin{enumerate}
+    \item $y^2 = x^3+x^2$
+    
+There is almost a 1-1 correspondence between $(x,y)$ rational on this curve and $t\in \Q$, via $t = \frac{y}{x}$, the slope of the line through $(x,y)$ and the origin. Indeed since $y=tx$, we have(if $x\neq 0$):\begin{equation}
+    t^2x^2 = x^3+x^2 \Rightarrow t^2 = 1+x \Rightarrow x=t^2-1 \text{ and } y=t^3-t 
+\end{equation}
+
+We don't quite get a 1-1 correspondence because $t=1$ and $t=-1$ both correspond to $(x,y) = (0,0)$. 
+
+So we can think of this cubic curve as a copy of $\Q$, but two of these points are mapped to the same point.
+
+\definition Resolution of Singluarity
+A singularity is a "bad" point of our curve, and a resolution is getting a "nice" map from a curve without singularities to our curve.
+
+\
+
+The resolution in the above case is done by a process called "blowing-up".
+\remark Hironaka, showed that blowing-up resolves singularites in zero characteristic. (The problem in non-zero characteristic is still unsolved).
+
+\remark Finding rational points on curves can be difficult. For example:\begin{equation}
+    x^n + y^n = 1 \Rightarrow X^n+Y^n=Z^n \text{ where }x=X/Z \text{ and }y=Y/Z
+\end{equation}
+This is Fermat's Last Theorem, which was very hard to solve.
+
+\item $x^3+y^3 = 9$
+
+Note on this curve we can define an algebraic operation "+", if we add in a point at infinity.
+In that case, the point at infinity is the identity "0", and $a,b,c$ on the curve lie on a line if and only if $a+b+c = 0$ in the group. To check that the group operation is associative we use the fact that: $a_1+a_2+\dots = b_1+b_2+\dots \iff $there is a rational function with poles at $a_i$ and zeroes at the $b_i$.
+
+\definition Groups of this kind are called \textbf{elliptic curves}, there are the 1-dimensional case of what is called \textbf{Abelian varieties}. Abelian varieties are algebraic groups that are "projective", roughly they have no missing points.
+
+\end{enumerate}
 \end{document}
