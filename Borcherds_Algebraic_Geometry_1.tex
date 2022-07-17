@@ -1,23 +1,57 @@
 \input{template.tex}
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
+\newcounter{Chapcounter}
+%\newcommand\showmycounter{\addtocounter{Chapcounter}{1}\themycounter}
+\newcommand{\lecture}[1] 
+{ {\newpage
+  \phantomsection %This is too make sure that the toc points to the correct page. Make sure the this doens't break.
+  \newpage
+  \addtocounter{Chapcounter}{1} \Large \underline{\textbf{ \color{Sepia} Lecture \theChapcounter:}} }   
+  \addcontentsline{toc}{section}{ \color{Sepia} Lecture:~\theChapcounter~~#1}    
+}
+\usepackage{eso-pic}
+
+
+\newlist{Properties}{enumerate}{2}
+\setlist[Properties]{label=Property \arabic*.,itemindent=*}
+
+
+%\pagecolor[rgb]{0.98, 0.96, 0.89}
+
+%\usepackage[pages=some]{background}
+
+%\backgroundsetup{
+%scale=1,
+%color=black,
+%opacity=0.4,
+%angle=0,
+%contents={%
+%  \includegraphics[width=\paperwidth,height=\paperheight]{scroll-background}
+%  }%
+%}
+
+\pagecolor[rgb]{0.94,0.86,0.69} %Trying to get that old paper look. 
+\color[rgb]{0.2,0.2,0.2} %Trying to get a more faded text look.
 
 
 \author{Rindra Razafy, ``Hagamena''}
 \title{Borcherd Algebraic Geometry 1}
 \setcounter{section}{-1}
 \begin{document}
-
 \maketitle
+%\AddToShipoutPictureBG{\includegraphics[width=\paperwidth,height=\paperheight]{scroll-background}};
+
+%\tikz[remember picture,overlay] \node[opacity=0.3,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{scroll-background}};
+
 \tableofcontents
 
 \newpage
 
 \section{Prologue}
-Some quick notes summarising the ``Algebraic geometry 1'' video lectures from R.E. Borcherds, found \href{https://youtube.com/playlist?list=PL8yHsr3EFj53j51FG6wCbQKjBgpjKa5PX}{here} 
+Some quick notes summarising the ``Algebraic geometry 1'' video lectures from R.E. Borcherds, found \href{https://youtube.com/playlist?list=PL8yHsr3EFj53j51FG6wCbQKjBgpjKa5PX}{here}.
 
-\newpage
-
+\lecture{}
 \section{Introduction}
 \subsection{Examples}
 \subsubsection{Pythagorean triangles}
@@ -233,4 +267,369 @@ How do we prove Pascal's theorem? We will use a proof using Algebraic Geometry a
     So this degree $3$ curve is equal to the union of a conic and a line, which is Pascal's line. Indeed since $p_1p_3p_5$ and $p_2p_4p_6$ both vanish on the 
     three intersection points, since they are on the curve but not on the conic, they must be on the line.
 \end{proof}
+
+\section{Kakeya sets}
+
+We will continue to look at examples from Algebraic Geometry. Kakeya Sets are constructs from real analysis.
+
+\begin{definition}
+    The first definition of a \textbf{Kakeya set} is a set such that if you have a unit line in the set we can turn the line around
+    in the set, for e.g. A circle, or an equilateral triange.
+
+    Slight variation of the defintion, is that it is a set contianing a unit line in every direction.
+\end{definition}
+
+    A Kakeya set over a finite field F is a set that contains a line in every direction. A conjecture from T.Wolff:
+
+    \begin{center}
+    The size  of a Kakeya set over $F$ in $F^n$ is at least $c_n|F|^n$.
+\end{center}
+    
+    This was proved in 2008 by Dvir with $c_n = \frac{1}{n!}$.
+    
+    The proof is in two steps:\begin{enumerate}
+        \item  A Kakeya Set in $F^n$ cannot lie in a hypersurface of degree $d<|F|$.
+        \begin{proof}
+            Suppose $f$ is a polynomial of degree $d<|F|$ defining a hypersurface which is a Kakeya Set, and let $f_d$ be the highest degree component.
+            Note that for any $v$ we can find $x$ so that $f(x+vt)$ vanishes for all $t$. This is what is meant by the zeroes of $f$ are a Kakeya set.
+            For any direction $v$ we can find a line such that $f$ vanishes on that line.
+
+            \
+
+            So coefficient $f_d(v)$ of $t^d$ vanishes for any $v$, so $f_d$ has degree < $|F|$, since if $f_d$ was non-zero it would have at most $< |F|$ zeroes
+            we must have that $f_d = 0$. So $f = 0$.
+        \end{proof} 
+
+        \item Observe, the polynomials of degree at most $|F|-1$ form a vector space of dimension $\binom{n+|F|-1}{n}$.
+
+        So we can find hypersurface of degree at most $|F|-1$ vanishing on any set with less than $\binom{n+|F|-1}{n}$ points.
+    \end{enumerate}
+
+So a Kakeya set has at least $\binom{n+|F|-1}{n}$ points, but \begin{equation*}
+    \binom{n+|F|-1}{n} = \frac{|F|(|F|+1)\cdots (|F|+n-1)}{1\cdot 2 \cdots n} \geq \frac{|F|^n}{n!}
+\end{equation*}
+    
+\begin{example}
+    27 lines on a cubic surface.
+
+We will prove that the cubic surface:\begin{equation*}
+    w^3+x^3+y^3+z^3 = 0 \text{ in }\mathbb{P}^3
+\end{equation*}
+Has exactly 27 lines on it.
+
+\
+
+Note $(w\colon x\colon y\colon z)\in \mathbb{P}^3$ then $(w\colon x\colon y\colon z) = (\lambda w\colon \lambda x\colon \lambda y\colon \lambda z)$, for all $\lambda\neq 0$.
+
+
+Note there is an obvious line:\begin{equation*}
+    (a\colon -a \colon b \colon -b) \text{ since }a^3+(-a)^3+b^3+(-b)^3 = 0
+\end{equation*}
+
+Note we can permute the coordinates and we can multiply by $\omega$ such that $\omega^3 = 1$.
+
+This gives us $3\times 3 \times 3 = 27$ possibilities.
+
+\end{example} 
+
+\lecture{}
+\section{Affine space and Zariski topology}
+
+\subsection{Affine space}
+
+\begin{definition}
+    Let $k$ be any field (most commononly taken as $\C$, $\R$ or a finite field), then an \textbf{Affine space} is just $k^n$ as a vector space, with slightly different automorphism group.
+    \begin{itemize}
+        \item automorphism of a vector space is:\begin{equation*}
+            GL_n(k) = \{n\times n\text{ matrices such that }\det \neq 0\}
+        \end{equation*} 
+        \item automorphism of Affine space is:\begin{equation*}
+            GL_n(k) \text{ and } \{\text{translations, i.e a map }x\rightarrow x+v\text{ for some vector }v\}
+        \end{equation*}
+
+        If $n=2$ the group can be pictured of as the group of matrices of the following shape:
+        \[\begin{bmatrix}
+            \ast_1 & \ast_1 & \ast_2\\
+            \ast_1 & \ast_1 & \ast_2\\
+            0 & 0 & 1
+        \end{bmatrix}\]
+
+        Where $\begin{bmatrix}
+            \ast_1 & \ast_1 \\
+            \ast_1 & \ast_1 
+        \end{bmatrix}\in GL_n(k)$ and $\begin{bmatrix}
+             \ast_2\\
+             \ast_2
+        \end{bmatrix}$ corresponds to a translation.
+    \end{itemize}
+    We write an affine space as $\mathbb{A}^n$.
+
+    Roughly speaking an affine space is a vector space where we have ``forgotten'' what our origin is.
+
+    If we have a vector space we can get an affine space by ``forgotting'' $0$, and if we have an affine space we can choose any point to be the origin and it gives us a vector space.
+\end{definition}
+
+\begin{example}
+    Note that if we look at the universe, the $3D$ space we live in is an affine space as there is no natural way to choose the origin.
+    But if we choose the origin to be the center of the earth then $3D$ space becomes a vector space.
+\end{example}
+
+\subsubsection{Affine geometry}
+\begin{definition}
+    \textbf{Affine geometry} can be thought as the study of affine space that is invariant under translations and linear transformations.
+\end{definition}
+
+\paragraph*{Properties of affine geometry}
+
+\begin{itemize}
+    \item points
+    \item lines
+    \item parallel lines
+    \item conics
+    \item Polynomial functions
+\end{itemize}
+
+Are all well-defined in affine geometry.
+
+\paragraph*{Not affine geometry}
+\begin{itemize}
+    \item circles
+    \item angles
+    \item lengths
+\end{itemize}
+
+\paragraph*{Coordinate ring of $\mathbb{A}^n$}
+Algebraic geometry tends to use the coordinate ring of affine space.\begin{definition}
+    The coordinate ring of $\mathbb{A}^n$, is just the space of polynomials on $\mathbb{A}^n$. Where $k$ is infinite.
+    If we got affine space we can reconstruct the ring of polynomials on it. Conversely if we are given a polynomial ring over $k$ we can reconstruct affine space as:\begin{align*}
+        \mathbb{A}^n &= \{\text{homomorphism from }k[x_1,\dots,x_n] \rightarrow k \text{ (as a k-algebra)} \}\\ 
+    \end{align*}
+    
+    Indeed a homomorphism taking $k[x_1,\dots,x_n]\rightarrow k$, just takes $x_i\rightarrow a_i$ for some $a_i\in k$. This corresponds to the point $(a_1,\dots,a_n)\in \mathbb{A}^n$.    
+\end{definition}
+
+Because of this the study of affine space is more or less equivalent to the study of this polynomial ring. In particular the automorphism group of these two are the same.
+
+\subsection{Zariski topology}
+\begin{definition}
+    An \textbf{algebraic set} is a set of zeros of some set of polynomials in $k[x_1,\dots,x_n]$. 
+\end{definition}
+
+\begin{example}
+    If $f(x,y) = x^2+y^2-1$, then our algebric set is the circle. 
+\end{example}
+\begin{example}
+    If $f(x) = x-a$ and $g(y) = y-b$, the our algebraic set is the point $(a,b)$.
+\end{example}
+
+Algebraic sets are closed under these operations:\begin{itemize}
+    \item Intersection: Indeed if $C_1,C_2,\dots$ are the zero sets of $P_1,P_2,\dots$ then $\bigcap C_i$ are the zeroes of $\bigcup P_i$.
+    \item Finite unions: If $C_1,C_2$ are the zeroes of $\{f_1,f_2,\dots\}$ and $\{g_1,\dots\}$ respectively, then $C_1\cup C_2$ are the zeroes of $\{{f_i}{g_j}\}$
+    \item Clear that $\mathbb{A}^n$ and $\emptyset$ are algebraic sets, taking the zero set of $0$ and of a constant non-zero polynomial respectively.
+\end{itemize}
+
+With these properties we see that we can create a topology where the closed sets are the algebraic sets. We call this topology the \textbf{Zariski topology}. 
+
+\begin{example}
+    Take ${\mathbb{A}^1}$, this is just the line. The closed sets:\begin{itemize}
+        \item $\mathbb{A}^1$, the zero set of $0$.
+        \item Any finite sets, since $\{a_1,\dots,a_n\}$ is the zero set of $(x-a_1)\cdots (x-a_n)$
+    \end{itemize}
+
+These are the only closed sets, since a polynomial in one variable is either the zero polynomial or has a finite amount of roots.
+
+
+Take any points $x\neq y$ and nbhs $U$ of $x$ and $V$ of $y$. Since $U^c$ and $V^c$ are finite (note if they are infinite then $U$ or $V$ is the empty set which is impossible). So $U$ and $V$ both contain all the points of $\mathbb{A}^1$
+except for a finite number of points. Since $k$ is infinite this means that $U\cap V \neq \emptyset$. This is true for all nbhs of $x$ and $y$, which means this space is not Haussdorff.
+\end{example}
+
+\begin{example}
+    Take $\mathbb{A}^2$. The closed sets are:\begin{itemize}
+        \item Points $(a,b)$
+        \item Any curve, the set of zero of $f(x,y) = 0$
+        \item Union of finite amount of curves and points
+    \end{itemize}
+
+    Note $\mathbb{A}^2\neq \mathbb{A}^1\times \mathbb{A}^1$. Indeed since $\mathbb{A}^1\times \mathbb{A}^1$ are unions of finite amount of vertical lines, horizontal lines and points.
+\end{example}
+
+\begin{example}
+    \textbf{\textit{Determinantal variety:}}
+Take $\mathbb{A}^{mn} = \text{linear maps }k^m\rightarrow k^n = m\times n \text{ matrices}$
+
+Determinantal variety = set all linear maps of rank $\leq i$.
+
+\
+
+We claim that this is an algebraic set. Indeed this set is given by the vanishing of all $(i+1)\times (i+1)$ minors of $m\times n$ matrix. This is a set of polynomials.
+
+In partucular the subset of maps from $k^m\rightarrow k^n$ that are onto is open in the Zariski topology.
+\end{example}
+
+\section{Noetherian spaces and Noetherian Rings}
+
+\subsection{Noetherian rings}
+\begin{definition}
+    A \textbf{Noetherian ring} is a ring satisfying these three equivalent conditions:\begin{itemize}
+        \item Every ideal is finitely generated
+        \item Every nonempty set of ideals has a maximal element
+        \item Every chain of increasing ideals,$I_0\subseteq I_1\subseteq I_2\subseteq \dots$, is eventaully constant. I.e. there is a $n$ such that $I_n=I_m$ for all $m\geq n$. 
+    \end{itemize}
+\end{definition}
+\begin{theorem} \textbf{\textit{Noether}}
+
+    \
+
+    If $R$ is Noetherian then $R[x]$ is Noetherian.
+    \begin{proof}
+        Let $I$ be an ideal of $R[x]$ and look at the chain $I_0\subseteq I_1\subseteq I_2\subseteq \dots$, of $R$ where:\begin{equation*}
+            I_n = \text{leading coeffs of polynomials of degree }\leq n\text{ in I}
+        \end{equation*}
+Since $R$ is Noetherian this stabilises, so $I_N=I_{N+1}=\dots$, for some $N$.
+
+Take the set of polynomials $s_0,s_1,\dots,s_N$ where:\begin{equation*}
+    s_i= \text{ degree }i\text{ polynomials whose leading coefficients generate }I_i, \text{ for }i=1,\dots,N
+\end{equation*}
+Note the sets $s_i$ are finite since $R$ is Noetherian.
+
+
+Then $s_0,s_1,\dots,s_N$ generate the ideal $I$.
+    \end{proof}
+\end{theorem}
+\begin{corollary} \textbf{\textit{Hilbert}}
+
+    \
+
+    $k[x_1,\dots,x_n]$ is Noetherian
+
+    \begin{proof}
+        Since $k$ is a field any ideal in $k$ is either generated by $0$ or generated by $1$. So $k$ is Noetherian, so $k[x_1]$ is Noetherian.
+        So inductively we can see that $k[x_1,\dots,x_n]$ is Noetherian.
+    \end{proof}
+\end{corollary}
+
+\subsection{Noetherian spaces}
+
+\begin{definition}
+    A topological space is called \textbf{Noetherian} if equivalently:\begin{itemize}
+        \item The closed sets satisfy the descsending chain condition. So any decreasing sequence:\begin{equation*}
+            C_0\supseteq C_1\supseteq C_2\supseteq \dots
+        \end{equation*}
+        Stabilises, i.e. $C_n=C_{n+1}=\dots$, for some $n$
+        \item Any nonempty collection of closed sets has a minimal element.
+    \end{itemize}
+\end{definition}
+These are in some sense the dual of the definition of Noetherian Ring.
+
+\begin{theorem}
+    $\mathbb{A}^n$ with Zariski topology is Noetherian.
+
+    \begin{proof}
+        Sketch:
+
+        Closed sets of $\mathbb{A}^n$ correspond to some ideals of $k[x_1,\dots,x_n]$. A descsending chains of closed sets of $\mathbb{A}^n$ correspond to an ascending chain of ideals in $k[x_1,\dots,x_n]$
+    \end{proof}
+\end{theorem}
+
+\
+
+Noetherian spaces are ``WEIRD'', the Noetherian condition is equivalent to saying that every open set is compact or quasicompact. Note quasicompact actually means the same as the regualar defintion of compact, Bourbaki made a mistake in the defintion and 
+only considered Haussdorff compact spaces to be compact, so when non-Haussdorff compact spaces were seen to be important they had to use the term quasicompact.
+
+\
+
+\paragraph*{Borcherds' Rule of Thumb} If we see the word ``quasi'' in mathematics then someone, somewhere and somewhen screwed up the terminology and had to use the term ``quasi'' to fix it.
+
+\
+
+\begin{remark}
+    In analysis we almost never see open compact sets, it can be shown that if a space is Noetherian and Haussdorff then it is finite.
+\end{remark}
+
+\subsection{A first definition of Algebraic Varieties}
+
+\subsubsection{Irreducible sets}
+
+\begin{definition}
+    A set is called \textbf{irreducible} if and only if it is nonempty and not the union of $2$ proper closed subsets.
+\end{definition}
+
+\begin{definition}
+    \textbf{Noetherian Induction}, pick a maximal closed set of some collection of closed sets.
+\end{definition}
+
+\begin{theorem}
+    Any Noetherian space is a finite union of irreducible subspaces.
+
+    \begin{proof}
+        Proof by Noetherian Induction:
+
+        We will show that every closed subset is a finite union of irreducibles. If not, pick a minimal counterexample $C$. We have two cases\begin{enumerate}
+            \item If $C$ is irreducible, then we are done and we have found a contradiction
+            \item If $C$ is not irreducible, then we can write $C=C_1\cup C_2$, where $C_1,C_2$ are smaller. By induction, $C_1,C_2$ are a finite union of irreducible sets, and so is $C$. Which is a contradiction.
+        \end{enumerate}
+
+        In all cases we have a contradiction so, there can't be a closed set that is not a finite union of irreducibles. So all closed sets, in particular the whole space is a finite union of irreducibles.
+    \end{proof}
+\end{theorem}
+
+So we can reduce the study of Noetherian spaces to the study of irreducible Noetherian spaces.
+
+
+\
+
+\begin{corollary}
+    Every algebraic set is a finite union of irreducible algebraic sets.
+\end{corollary}
+
+\begin{definition}
+    \textbf{A provisional definition of Algebraic Varieties}:
+    
+    They are irreducible closed subset of affine space.
+\end{definition}
+
+\subsubsection{Examples}
+
+\begin{example}
+  This definition is not perfect. Suppose we take the variety given by: $xy=1$ and the set of nonzero points in $\mathbb{A}^1$.
+
+Note the set of nonzero points in $\mathbb{A}^1$ is not a closed set, but since we can map the hyperbola to this by the mapping $(x,y)\rightarrow x$, we should consider it an algebraic variety.
+
+\
+
+\href{https://youtu.be/D_eJ8BWLb24?t=1110}{\includegraphics[scale = 0.25]{algebraic-varieties.png}}
+
+\
+
+We shall give a better definition later (I guess we can clook at these like ``quasi-algebraic varieties'').
+\end{example}
+
+\begin{example}
+    Take the algebraic set defined by $x^2+y^2 - 2z^2 = 0 \text{ and }2x^2-y^2-z^2 = 0$.
+
+    This is the union of four irreducible subsets:\begin{enumerate}
+        \item $x=y=z$
+        \item $x=0y=z$
+        \item $x=-y=-z$
+        \item $x=y=-z$
+    \end{enumerate}
+
+    So the intersection of irreducible sets may not be irreducible.
+\end{example}
+\newpage 
+\begin{example}
+    If we take $xy=0$, we have the union of the $x$-axis and the $y$-axis.
+
+    \
+
+    If we take $xy=1$, the we hyperbola, which is irreducible and connected in the Zariski topology, but disconnected in the usual topology.
+
+    \
+
+\href{https://youtu.be/D_eJ8BWLb24?t=1295}{\includegraphics[scale=0.25]{connected-irreducible-spaces}}
+
+\end{example}
+
+We have now conclueded the section on Noetherian spaces, next section we will look at the Hilbert Nullstellensatz, and the connection between Algebraic Varieties and Ideals.
+
 \end{document}
