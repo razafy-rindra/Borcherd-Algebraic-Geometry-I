@@ -632,4 +632,209 @@ We shall give a better definition later (I guess we can clook at these like ``qu
 
 We have now conclueded the section on Noetherian spaces, next section we will look at the Hilbert Nullstellensatz, and the connection between Algebraic Varieties and Ideals.
 
+
+\section{Hilbert's Nullstellensatz}
+\begin{definition}
+    \textbf{Hilbert's Nullstellensatz}(zero's theorem) describes the relation between Ideals in a polynomial ring and Algebraic subsetes of the corresponding affine sets.
+
+    \begin{itemize}
+        \item If we have a subset $Y\subseteq \mathbb{A}^n$ we can map it to the ideal $I(Y)\subseteq k[x_1,\dots,x_n]$ where $I(Y)$ is the set of polynomials vanishing on $Y$.
+        \item If we have an ideal $\mathfrak{a}\subseteq k[x_1,\dots,x_n]$ we can map it top the set $Z(\mathfrak{a})$ which is the set of zeros of all the polynomials of $\mathfrak{a}$.
+    \end{itemize}
+\end{definition}
+\paragraph*{What is the relationship between these two operations?}
+\begin{align*}
+    Z(I(Y)) = \text{closure of }Y \text{ in the Zariski topology}
+\end{align*}
+
+This fact basically comes from the definiton of the Zariski topology, let $W$ be any closed set contianing $Y$. We know that $W$ is the zero set of some set of polynomials $S$. For all $f\in S$ we have:\begin{equation*}
+    f(x) = 0\text{ for all }x\in Y
+\end{equation*}
+Therefore $S\subseteq I(Y)$, therefore for all $f\in S$ and we have by definition of $Z(\cdot)$:\begin{equation*}
+    f(y) = 0 \text{ for all }y\in Z(I(Y))
+\end{equation*}
+
+So $y\in Z(S)$, therefore $Z(I(Y))\subseteq W = Z(S)$. Since $Z(I(Y))$ is the smallest closed set containing $Y$ we indeed see that it is the closure.
+
+\
+
+On the other hand is it true that $I(Z(\mathfrak{a})) = \mathfrak{a}$ for all ideal $\mathfrak{a}\subseteq k[x_1,\dots,x_n]$? \textbf{NO}:\begin{example}
+    Let $\mathfrak{a} = (x^2)\subseteq k[x]$, and $Z(\mathfrak{a}) = 0$ so $I(Z(\mathfrak{a})) = I(0) = (x)$.
+\end{example}
+
+More generally, if $f^n\in \mathfrak{a}$, then $f\in I(Z(\mathfrak{a}))$, since certainly $f$ vanishes at all points of $Z(\mathfrak{a})$ since $f^n$ does.
+
+Therefore \begin{equation*}
+    \{f\in k[x_1,\dots,x_n]\mid f^n\in \mathfrak{a}, \text{ for some }n\in\N^\ast\} = \sqrt{\mathfrak{a}} \subseteq I(Z(\mathfrak{a}))
+\end{equation*}
+
+Note $\sqrt{\mathfrak{a}}$ is an ideal.
+
+
+\paragraph*{Is $\sqrt{a} = I(Z(\mathfrak{a}))$?}
+
+\textbf{NO!}
+
+\begin{example}
+    If $\mathfrak{a} = (x^2+1)\in \R[x]$, then $Z(\mathfrak{a}) = \emptyset$, and $I(Z(\mathfrak{a})) = \R[x] \neq \sqrt{(x^2+1)} = (x^2+1)$
+\end{example}
+
+\subsection{Weak Nullstellensatz}
+\paragraph*{What are the maximal ideals of a polynomial ring $k[x_1m\dots,x_n]$}
+
+There are Obvious maximal ideals:
+
+Let $(a_1,\dots,a_n)\in \mathbb{A}^n$ and take the ideal $(x-a_1,x-a_2,\dots,x-a_n) = $functions vanishing on $(a_1,\dots,a_n)$.
+
+\
+
+Note that \begin{equation*}
+    k[x_1,\dots,x_n]/(x-a_1,x-a_2,\dots,x-a_n) \simeq k
+\end{equation*}
+
+So this is a maximal ideal. Are all ideals of this form? Not in general, if we take $\R[x]$ then $(x^2+1)$ is a maximal ideal, since $\R[x]/(x^2+1) \simeq \C$.
+
+But this is true if $k$ is \textbf{Algebraically closed!} This is the weak Nullstellensatz.
+
+\begin{theorem} \textbf{Weak Nullstellensatz}
+For $k$ algebraically closed all maximal ideals of $k[x_1\dots,x_n]$ are of the form $(x_1-a_1,\dots,x_n-a_n)$.
+    \begin{proof}
+        \begin{lemma}
+            If $K$ is a field an is a finitely generated algebra over $k$, then $K$ is a finitely generated module over $k$.
+            \begin{proof}
+                We are going to cheat: We will assume that $k$ is uncountable. (If $k$ is countable the proof is harder).
+
+                Since $K$ is a finitely generated algebra, then $K$ is at most countable dimension as a module. If $x\in K$ is transcendental over $k$, if we had, for some $a_1,\dots,a_n\in k$ such that  $\sum_{k=1}^n \frac{a_k}{x-a_k} = 0 \Rightarrow \sum_{k=1}^n a_k\prod_{i\neq k}(x-a_j) = 0$, which is impossible since $x$ is transcendental.
+                
+                \
+                
+                So the elements $\frac{1}{x-a}$ for $a\in k$ form an uncountable linearly independant set, which is a contradiction to the fact that $K$ is a finitely generated algebra over $k$.
+
+                \
+
+                So all $x\in K$ are algebraic over $k$, therefore $K$ is finitely generated as a module over $k$.
+            \end{proof}
+        \end{lemma}
+        Suppose that $I$ is a maximal ideal of $k[x_1,\dots,x_n]$ we want to show that $I = (x-a_1,\dots,x-a_n)$ for some $(a_1,a_2,\dots)$.
+
+        Let $K = k[x_1,\dots,x_n]/I$, then $K$ is a field and is finitely generated as an algebra. So by the previous lemma $K$ is finietely generated as a module. In other words $K$ is algebraic over $k$,
+
+        But since we assumed that $k$ is algebraically closed we have $k=K$.
+
+        Therefore, $x_i+I\in k$ for all $i$ so $x_i+I=a_i+I$ for some $a_i\in k$ so $x_i-a_i\in I$. So $(x_1-a_1,\dots,x_n-a_n)\subseteq I$ so $I = (x_1-a_1,\dots,x_n-a_n)$, since $(x_1-a_1,\dots,x_n-a_n)$ is a maximal ideal and $I\not=k[x_1,\dots,x_n]$.
+    \end{proof}
+\end{theorem}
+
+\subsection{Strong Nullstellensatz}
+
+\paragraph*{Proof of SN with Rabinovitsch trick}
+
+\begin{theorem}\textbf{Strong Nullstellensatz}
+    If $k$ is algebraically closed then for all ideals $\mathfrak{a}\subseteq k[x_1,\dots,x_n]$ we have $I(Z(\mathfrak{a})) = \sqrt{a}$.
+
+\begin{proof}
+    
+Suppose that $\mathfrak{a}$ is generated by elements $f_1,\dots,f_n$ and that $f\in I(Z(\mathfrak{a}))$, we want to show that $f\in\sqrt{\mathfrak{a}}$.
+
+\ 
+
+\textbf{Rabinovitsch idea} is too add an extra variable $x_0$.
+
+\
+
+So $f_1,\dots,f_m,1-x_0f$ have no common zeroes in $\mathfrak{A}^{n+1}$, since if $x$ is a zero of $f_1,\dots,f_n$ then it is a zero of $f$, so $1-x_0f(x) = 1$.
+
+Now apply the weak Nullstellensatz in $\mathbf{A}^{n+1}$, since $f_1,\dots,f_m,1-x_0f$ have no common zeroes, they are not contained in any of the maximal ideals(Since if they are contained in a maximal ideal $(x_1-a_1,\dots,x_n-a_n)$ then $(a_1,\dots,a-n)$ would be a common zero) so they generate the unit ideal.
+
+So there exists $g_i\in k[x_0,x_1,\dots,x_n]$ such that $1 = a_0(1-x_0f)+g_1f_1+\dots+{g_n}{f_n}$
+
+Let $x_0 = \frac{1}{f}$, (we are now working in the ring of rational function) we have:\begin{equation*}
+    1 = g_1\bigg(x_1,\dots,x_n,\frac{1}{f}\bigg)f_1+g_2\bigg(x_1,\dots,x_n,\frac{1}{f}\bigg)f_2+\dots+g_n\bigg(x_1,\dots,x_n,\frac{1}{f}\bigg)f_n
+\end{equation*}
+We can clear denominators by multiplying by a high power of $f$ and we get:\begin{equation*}
+    f^n = \sum h_if_i \text{ where }h_i = {f^n}{g_i}\in k[x_1,\dots,x_n]
+\end{equation*}
+So $f^n\in (f_1.\dots,f_n)$ so $f\in \sqrt{(f_1.\dots,f_n)} = \sqrt{\mathfrak{a}}$.
+\end{proof}
+\end{theorem}
+ \begin{tabular}{|c|c|c|}
+    \hline
+    Affine space $\mathbb{A}^n$& correspondence & $k[x_1,\dots,x_n]$\\
+    \hline
+    Points $(a_1,\dots,a_n)$ & $\underbrace{\iff}_{Weak Nullstellensatz}$ & maximal ideals $(x_1,\dots,x_n)$ \\
+    \hline
+    Algebraic sets  & $\underbrace{\iff}_{Strong Nullstellensatz}$  & Radical ideals $\mathfrak{a} = \sqrt{\mathfrak{a}}$\\
+    \hline 
+    closed subschemes &$\underbrace{\iff}_{\textit{Will see in second part of course}}$ & All Ideals \\
+    \hline
+\end{tabular}
+
+
+\begin{example}
+
+    In this example we have a curve described by the radical ideal $(y-x^2)$ and one given by the radical ideal $(y)$.
+
+    We look at the intersection between the two curves by looking at the zero set of the ideal $(y-x^2,y) = (y,x^2)$. However, this ideal is not a radical ideal, as the root of this ideal is $(x,y)$ which corresponds to the point $(0,0)$ in affine space.
+
+    \
+
+    \href{https://youtu.be/1UvW5iTkbLw?t=772}{\includegraphics[scale = 0.25]{Strong_Null.png}}
+
+    \
+
+    So we have a non-radical ideal that is the intersection of two curves. This ideal is non-radical since if we look at the intersection between the two curves we should be counting the intersection point as two points.
+\end{example}
+
+\begin{example}\textit{Nilpotent matrices}
+
+    \begin{definition}
+        A matrix $A\in M_n(k)\simeq\mathbb{A}^{n^2}$ is \textbf{Nilpotent} if $A^n = 0$ for some $n\in \N$,
+    \end{definition}
+ 
+Notice that if:\begin{equation*}
+    A = \begin{bmatrix}
+        a_{11} & a_{12} & \dots\\
+        a_{21}\\
+        \vdots
+    \end{bmatrix} \Rightarrow A^n = \begin{bmatrix}
+        \text{ something complicated, homogenous polynomials in degree }n\text{ in coeffs }a_{ij}
+    \end{bmatrix}
+\end{equation*}
+
+The entries of the matrix $A^n$ generate an ideal $I$ in the coordinate ring of $A^{n^2}$, in some sense this ideal describes the set of nilpotent matrices. Is $I = \sqrt{I}$? The answer is NO!
+
+If $A$ is nilpotent, then all eigenvalues are $0$, so the trace is $0$. So $a_{11}+a_{22}+\dots+a_{nn}\not\in I$, but this element is in $\sqrt{I}$ by Hilbert's Nullstellensatz.
+
+\
+
+Let us take $n=1$, let $A = \begin{bmatrix}
+    a & b\\
+    c & d
+\end{bmatrix}$ such that $A^2 = 0$. But $A^2 = \begin{bmatrix}
+    a^2+bc & b(a+d)\\
+    c(a+d) & d^2+bc
+\end{bmatrix}$
+
+So $I = (a^2+bc, b(a+d), c(a+d), d^2+bc)$. We have seen that some power of $\text{tr}(A) = a+d$ is in $I$. What is the smallest power?
+An easy assumption is that $(a+d)$ is in $I$, but this is false! The smallest power of $(a+d)$ in $I$ is given for $(a+d)^3$.
+
+\begin{equation*}
+    (a+d)^2 = a^2 + 2ad + d^2
+\end{equation*}
+
+\begin{equation}
+    (a+d)^3 = a^3+3a^2d+3ad^2+d^3
+\end{equation}
+
+\end{example}
+
+\paragraph*{What about communting matrices?}
+\begin{example}
+    Let $AB=BA$, with $A=(a_{ij}),B=(b_{ij})\in M_n(k)$.
+
+    Let $I$ be the ideal generated by the entries in $AB-BA$, is $I = \sqrt{I}$?
+
+    We don't know this is a hard open problem.
+\end{example}
+
 \end{document}
