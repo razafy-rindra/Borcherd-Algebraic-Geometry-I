@@ -836,5 +836,113 @@ An easy assumption is that $(a+d)$ is in $I$, but this is false! The smallest po
 
     We don't know this is a hard open problem.
 \end{example}
+\lecture{}
+
+\section{The Lasker Noether Theorem}
+
+\subsection{Some background}
+
+Let us recall that Algebraic sets correspond to radical ideals. Since algebraic sets correspond to finite unions of irreducible algebraic sets, and these sets corresponds to Prime ideals, from this we can conclude the following theorem.
+
+\begin{theorem}
+    Any radical ideal is the intersection of finite number of prime ideals.
+\end{theorem}
+
+\paragraph*{Question: What about ideals that are not radical? Is there a similar decomposition?}
+
+The answer is given to us by Lasker: Ideals of $k[x_1.\dots,x_n]$ is the intersection of a finite number of primary ideals.
+
+\
+
+Noether generalised this theorem by showing that it is true for Noetherian rings.
+
+\begin{definition}\textbf{Associated Prime}
+    Let $M$ be a module over $R$, and \textbf{associated prime }$\mathfrak{p}$ is a prime ideal $\mathfrak{p}$ such that M contains a submodule isomomorphic to $R/\mathfrak{p}$, for brevity we write $R/\mathfrak{p}\subseteq M$.
+\end{definition}
+
+\begin{definition}\textbf{Coprimary Module}
+    We have two definitions:\begin{itemize}
+        \item A module $M$ over $R$ is called \textbf{coprimary} if:
+        \begin{equation*} ab = 0, \text{ for }a\in R\text{ and }b\in M, \Rightarrow b=0\text{ or }a^n=0\text{ for some n} \tag{$\dagger$}\end{equation*}
+        \item\textit{A more convinent definition} A module $M$ over $R$ is coprimary if it has exactly one associated prime $\mathfrak{p}$.  
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    If the ring $R$ is Noetherian, the two definitions of coprimary are equivalent for finitely generated modules.
+\end{remark}
+
+\begin{definition}\textbf{Primary ideal}
+\begin{itemize}
+    \item  \textit{A first definition by Lasker}: $\mathfrak{p}\subseteq R$ is primary if and only if $ab\in \mathfrak{p}$ implies $a\in \mathfrak{p}$ or $b^n\in \mathfrak{p}$ for some $n$.
+    \begin{example}
+        In $k[x]$: $(x)$ is prime and $(x^n)$ is primary. Note in general primary ideals need not be powers of prime ideals
+    \end{example}
+
+    \item \textit{Another definition}: An ideal $\mathfrak{p}\subseteq R$ is primary if and only if the module $R/\mathfrak{p}$ is coprimary
+\end{itemize}
+\begin{remark}
+    In general for a module $M$ over $R$, $N\subseteq M$ is primary $\iff$ $M/N$ is coprimary.
+\end{remark}
+There are two different definitions for this primary ideal under the other definition but they are equivalent if $R$ is Noetherian.       
+\end{definition}
+
+\begin{theorem}\textit{\textbf{Lasker-Noether Theorem for finitely generated modules over Noetherian Rings}}
+
+    Let $M$ be a f.g. module over a Noetherian Ring. Then $0$ an intersection of primary submodules of $M$. 
+
+    Alternatively: $M\subseteq \oplus_{\text{finite}} \text{coprimary modules}$
+\end{theorem}
+\begin{example}
+    For $\Z$-modules (abelian groups): Some example of coprimary modules:\begin{itemize}
+        \item $\Z^n$ where the prime ideal is $(0)$
+        \item Any finite group of order $p^n$ where the prime ideal is $(p)$
+    \end{itemize}
+    So our theorem says that a finitely generated abelian group is contained in direct sum of copies of $\Z$ and finite groups of prime power order. If we recall the structure theorem this inclusion is actually an equality.        
+\end{example}
+
+\begin{proof}\textit{Lasker-Noether Theorem}
+    
+    This proof has two steps:\begin{enumerate}
+        \item \begin{lemma}
+            Any submodule $M$ is an intersection of a finite number of irreducible submodules.
+
+            \begin{proof}
+                Noetherian Induction. What does this mean? The submodules of $M$ have the property that any non-empty subset has a maximal element (since $M$ is f.g.  over a Noetherian ring).
+            So suppose $N$ is a maximal submodule that is not a finite intersection of irreducibles, so either this submodule is irreducible which is a contradiction since it is an interesection of itself, or it is the intersection of two larger submodules which are by induction a finite intersection of irreducibles, contradiction.
+            \end{proof}
+        \end{lemma}
+        \item \begin{lemma}
+            Any irreducible submodule $N$ is primary
+        \end{lemma}
+        \begin{proof}
+            We can reduce to the case where $N$ is $0$ by taking quotients. So we want to show that $(0)$ is irreducible implies that $M$ is coprimary.
+
+            But if $M$ is not coprimary, then there are two associated primes $\mathfrak{p}$, $\mathfrak{q}$ such that $M$ has submodules isomorphic to $R/\mathfrak{p}$ and $R/\mathfrak{q}$.
+
+            These submodules have intersection $0$ which implies that $0$ is not irreducibles.
+        \end{proof}
+    \end{enumerate}
+
+    Combining the two previous lemmas gives us our proof.
+\end{proof}
+\begin{example}
+    Let us look at the ideal generated by $(xy,y^2)$ in $k[x,y]$.
+
+    The algebraic set is given by the intersection of $V(xy) = x\text{ and }y-axis$ and $V(y^2) = x$-axis (doubled up in some informal sense).
+
+    The intersection of these two sets is just the $x$-axis, whith a sort of ``double point'' near the origin.
+
+    We can understand this ``double point'' by looking at the primary decomposition of the ideal:
+    \[(xy,y^2) = (y)\cap \underbrace{(x.y^2)}_{\text{embedded component}}\]
+
+    \href{https://youtu.be/1oKh8QJ1I4k?t=619}{\includegraphics[scale = 0.25]{lasker_noether.png}}
+
+Note this primary decomposition is not unique:\begin{align*}
+    (xy,y^2) &= (y)\cap (x,y^2)\\
+             &= (y)\cap (x+y,y^2)
+\end{align*}
+
+\end{example}
 
 \end{document}
